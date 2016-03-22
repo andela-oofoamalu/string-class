@@ -46,8 +46,31 @@ describe("MyStringClass test", function() {
   });
 
   describe("To upper", function() {
-    it("Should return a string in all caps", function() {
+    var string1, string2, string3;
 
+    beforeEach(function() {
+      string1 = new MyStringClass("this is in lowercase");
+      string2 = new MyStringClass("This is 1 sentence");
+      string3 = new MyStringClass("ALL CAPS");
+    });
+
+    it("Should return a string in all caps", function() {
+      var result1 = string1.toUpper();
+      var result2 = string2.toUpper();
+      var result3 = string3.toUpper();
+
+      expect(result1).toEqual("THIS IS IN LOWERCASE");
+      expect(result2).toEqual("THIS IS 1 SENTENCE");
+      expect(result3).toEqual("ALL CAPS");
+    });
+
+    it("Should be called without passing an argument", function() {
+      spyOn(string1, 'toUpper');
+      string1.toUpper();
+
+      expect(string1.toUpper).toHaveBeenCalled();
+      expect(string1.toUpper).toHaveBeenCalledWith();
+      expect(string1.toUpper).not.toHaveBeenCalledWith("this is in lowercase");
     });
   });
 
