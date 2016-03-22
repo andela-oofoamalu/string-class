@@ -133,8 +133,25 @@ describe("MyStringClass test", function() {
   });
 
   describe("words", function() {
-    it("Should return an array containing all the words in the string", function() {
+    var string;
 
+    beforeEach(function() {
+      string = new MyStringClass("This is a very long sentence, I am aware of this");
+    });
+
+    it("Should return an array containing all the words in the string", function() {
+      var result = string.words();
+
+      expect(result).toEqual(jasmine.any(Array));
+    });
+
+    it("Should be called without passing an argument", function() {
+      spyOn(string, 'words');
+      string.words();
+
+      expect(string.words).toHaveBeenCalled();
+      expect(string.words).toHaveBeenCalledWith();
+      expect(string.words).not.toHaveBeenCalledWith("This is a very long sentence, I am aware of this");
     });
   });
 
