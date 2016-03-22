@@ -156,8 +156,16 @@ describe("MyStringClass test", function() {
   });
 
   describe("words count", function() {
-    it("Should return the total count of words in the string", function() {
+    var string;
 
+    beforeEach(function() {
+      string = new MyStringClass("Totoal word count is five");
+    });
+
+    it("Should return the total count of words in the string", function() {
+      var wordCount= string.wordCount();
+
+      expect(wordCount).toEqual(5);
     });
   });
 
