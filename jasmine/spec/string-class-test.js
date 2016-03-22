@@ -75,8 +75,28 @@ describe("MyStringClass test", function() {
   });
 
   describe("To lower", function() {
-    it("Should return a string in all lower case", function() {
+    var string1, string2;
 
+    beforeEach(function() {
+      string1 = new MyStringClass("ALL CAPS.");
+      string2 = new MyStringClass("H2SO4 is a type of acid");
+    });
+
+    it("Should return a string in all lower case", function() {
+      var result1 = string1.toLower();
+      var result2 = string2.toLower();
+
+      expect(result1).toEqual("all caps.");
+      expect(result2).toEqual("h2so4 is a type of acid");
+    });
+
+    it("Should be called without passing an argument", function() {
+      spyOn(string1, 'toLower');
+      string1.toLower();
+
+      expect(string1.toLower).toHaveBeenCalled();
+      expect(string1.toLower).toHaveBeenCalledWith();
+      expect(string1.toLower).not.toHaveBeenCalledWith("ALL CAPS.");
     });
   });
 
