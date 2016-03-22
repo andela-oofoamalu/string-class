@@ -19,7 +19,7 @@ describe("MyStringClass test", function() {
     });
   });
 
-  describe("Has vowels", function() {
+  describe("Test method hasvowels", function() {
     var string1, string2;
 
     beforeEach(function() {
@@ -45,7 +45,7 @@ describe("MyStringClass test", function() {
     });
   });
 
-  describe("To upper", function() {
+  describe("Test method toUpper", function() {
     var string1, string2, string3;
 
     beforeEach(function() {
@@ -54,7 +54,7 @@ describe("MyStringClass test", function() {
       string3 = new MyStringClass("ALL CAPS");
     });
 
-    it("Should return a string in all caps", function() {
+    it("Should return an uppercased string", function() {
       var result1 = string1.toUpper();
       var result2 = string2.toUpper();
       var result3 = string3.toUpper();
@@ -74,7 +74,7 @@ describe("MyStringClass test", function() {
     });
   });
 
-  describe("To lower", function() {
+  describe("Test method toLower", function() {
     var string1, string2;
 
     beforeEach(function() {
@@ -82,7 +82,7 @@ describe("MyStringClass test", function() {
       string2 = new MyStringClass("H2SO4 is a type of acid");
     });
 
-    it("Should return a string in all lower case", function() {
+    it("Should return a lowercased string", function() {
       var result1 = string1.toLower();
       var result2 = string2.toLower();
 
@@ -107,8 +107,28 @@ describe("MyStringClass test", function() {
   });
 
   describe("Is Question", function() {
-    it("Should return true if a string is a question", function() {
+    var string1, string2;
 
+    beforeEach(function() {
+      string1 = new MyStringClass("Where is my glasses?");
+      string2 = new MyStringClass("This is a line");
+    });
+
+    it("Should return true if a string is a question", function() {
+      var result1 = string1.isQuestion();
+      var result2 = string2.isQuestion();
+
+      expect(result1).toEqual(true);
+      expect(result2).toEqual(false);
+    });
+
+    it("Should be called without passing an argument", function() {
+      spyOn(string1, 'isQuestion');
+      string1.isQuestion();
+
+      expect(string1.isQuestion).toHaveBeenCalled();
+      expect(string1.isQuestion).toHaveBeenCalledWith();
+      expect(string1.isQuestion).not.toHaveBeenCalledWith("Where is my glasses?");
     });
   });
 
